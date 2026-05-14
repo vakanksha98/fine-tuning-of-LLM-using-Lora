@@ -1,159 +1,121 @@
-# 🔧 Fine-Tuning GPT-2 using LoRA (Parameter-Efficient LLM Training)
+# Fine-Tuning GPT-2 using LoRA
 
-## 📌 Overview
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?logo=pytorch)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-FFD21E?logo=huggingface)
+![LoRA](https://img.shields.io/badge/LoRA-PEFT-FF6B6B)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-This project implements **parameter-efficient fine-tuning of GPT-2** using **LoRA (Low-Rank Adaptation)**. The goal is to adapt a pre-trained language model to a custom dataset while significantly reducing training cost and memory usage.
+Parameter-efficient fine-tuning of GPT-2 using LoRA (Low-Rank Adaptation) for custom NLP tasks.
 
----
+## Overview
 
-## 🎯 Objective
+This project implements parameter-efficient fine-tuning of GPT-2 using LoRA (Low-Rank Adaptation). The goal is to adapt a pre-trained language model to a custom dataset while significantly reducing training cost and memory usage.
 
-* Fine-tune **GPT-2** for a downstream NLP task
-* Reduce computational overhead using LoRA
-* Achieve efficient training on limited GPU resources
-* Evaluate performance of the fine-tuned model
-
----
-
-## 🧠 Key Concept: LoRA
+## Key Concept: LoRA
 
 LoRA (Low-Rank Adaptation) is a technique that:
+- **Freezes** pre-trained model weights
+- **Introduces** small trainable low-rank matrices
+- **Updates** only these matrices during training
 
-* Freezes pre-trained model weights
-* Introduces small trainable low-rank matrices
-* Updates only these matrices during training
+### Benefits
+- Drastically reduces trainable parameters
+- Faster training
+- Lower GPU memory usage
+- Maintains comparable performance
 
-👉 Benefits:
+## Tech Stack
 
-* 🔹 Reduces trainable parameters drastically
-* 🔹 Faster training
-* 🔹 Lower GPU memory usage
-* 🔹 Maintains comparable performance
+| Category | Technology |
+|----------|------------|
+| Language | Python 3.8+ |
+| Framework | PyTorch |
+| LLM | HuggingFace Transformers |
+| Fine-tuning | PEFT (LoRA) |
+| Acceleration | Accelerate, bitsandbytes |
 
----
+## Project Structure
 
-## ⚙️ Approach
-
-1. Load **pre-trained GPT-2 model** from HuggingFace
-2. Apply **LoRA configuration using PEFT**
-3. Prepare dataset (input-output / instruction format)
-4. Tokenize text using GPT-2 tokenizer
-5. Fine-tune using **Trainer API**
-6. Evaluate model performance
-7. Save fine-tuned model
-
----
-
-## 🧠 Model Details
-
-* **Base Model:** GPT-2
-* **Fine-Tuning Technique:** LoRA (PEFT)
-* **Framework:** HuggingFace Transformers
-* **Backend:** PyTorch
-
----
-
-## 📊 Dataset
-
-* Custom dataset used for fine-tuning
-* Format: Instruction / text-based input-output
-* Preprocessing:
-
-  * Tokenization
-  * Padding & truncation
-
----
-
-## 🚀 Features
-
-* Efficient fine-tuning using LoRA
-* Reduced training cost compared to full fine-tuning
-* Modular training and evaluation pipeline
-* Scalable to larger LLMs
-
----
-
-## 📈 Results
-
-* Significant reduction in trainable parameters
-* Faster convergence compared to full fine-tuning
-* Efficient adaptation of GPT-2 to custom task
-
----
-
-## 🔍 Key Insights (Interview Important)
-
-* LoRA avoids updating full model weights → reduces overfitting
-* GPT-2 can be adapted to domain-specific tasks efficiently
-* Parameter-efficient fine-tuning is crucial for large-scale LLM deployment
-
----
-
-## ▶️ How to Run
-
-### Install Dependencies
-
-```bash id="cmd4"
-pip install transformers datasets peft accelerate bitsandbytes
+```
+fine-tuning-of-LLM-using-Lora/
+├── AKKUFINETUNING1.ipynb           # Main fine-tuning notebook
+├── Copy_of_final_evaluation_finetuning.ipynb
+├── akdm_final_model.ipynb           # Final model evaluation
+├── README.md                         # This file
+└── requirements.txt                  # Dependencies
 ```
 
-### Training
+## Installation
 
-```bash id="cmd5"
-python train.py
+```bash
+# Clone repository
+git clone https://github.com/vakanksha98/fine-tuning-of-LLM-using-Lora.git
+cd fine-tuning-of-LLM-using-Lora
+
+# Install dependencies
+pip install -r requirements.txt
 ```
 
-### Evaluation
+## Dependencies
 
-```bash id="cmd6"
-python evaluate.py
+```
+transformers>=4.30.0
+datasets>=2.14.0
+peft>=0.4.0
+accelerate>=0.20.0
+bitsandbytes>=0.40.0
+torch>=2.0.0
+jupyter>=1.0.0
 ```
 
----
+## Approach
 
-## 📂 Project Structure
-
-```id="struct3"
-├── notebooks/
-│   ├── finetuning.ipynb
-│   ├── training.ipynb
-│   └── evaluation.ipynb
-├── data/
-├── outputs/
-├── models/
-├── README.md
+```
+Load Pre-trained GPT-2
+       ↓
+Apply LoRA Configuration (PEFT)
+       ↓
+Prepare Dataset (Instruction format)
+       ↓
+Tokenize Text
+       ↓
+Fine-tune using Trainer API
+       ↓
+Evaluate Performance
+       ↓
+Save Fine-tuned Model
 ```
 
----
+## Key Insights (Interview Important)
 
-## 🛠️ Tech Stack
+- LoRA avoids updating full model weights → reduces overfitting
+- GPT-2 can be adapted to domain-specific tasks efficiently
+- Parameter-efficient fine-tuning is crucial for large-scale LLM deployment
+- LoRA enables fine-tuning on limited GPU resources
 
-* Python
-* PyTorch
-* HuggingFace Transformers
-* PEFT (LoRA)
-* Datasets
-* Accelerate
+## Portfolio Presentation
 
----
+This project demonstrates:
+- LLM fine-tuning methodology
+- LoRA/PEFT implementation
+- Parameter-efficient training
+- HuggingFace ecosystem
+- GPU memory optimization
 
-## 🔮 Future Work
+## Future Work
 
-* Implement QLoRA for further optimization
-* Fine-tune larger models (LLaMA, Mistral)
-* Hyperparameter tuning (rank, alpha, dropout)
-* Deploy as chatbot/API
+- [ ] Implement QLoRA for further optimization
+- [ ] Fine-tune larger models (LLaMA, Mistral)
+- [ ] Hyperparameter tuning (rank, alpha, dropout)
+- [ ] Deploy as chatbot/API
 
----
+## Author
 
-## 🙌 Acknowledgements
+**Akanksha Verma**
+- M.Tech – Computer Science and Data Processing
+- IIT Kharagpur
 
-* HuggingFace Transformers
-* PEFT Library
-* Open-source LLM community
+## License
 
----
-
-## 📬 Contact
-
-[akanksha1831998@gmail.com]
+MIT License - See [LICENSE](LICENSE) for details.
